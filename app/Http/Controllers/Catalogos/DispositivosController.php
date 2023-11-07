@@ -29,7 +29,9 @@ class DispositivosController extends Controller
             'garantia_inicio',
             'garantia_fin',
             'active',
+            'ultimo_check',
         )
+        ->orderBy('ultimo_check')
         ->get();
 
         return response([
@@ -66,5 +68,21 @@ class DispositivosController extends Controller
             'data' => $dispositivo
         ]);
 
+    }
+
+    public function getAssetNames() {
+        $assets = Dispositivos::select(
+            'asset_name as name'
+        )
+        ->distinct()
+        ->get();
+
+        // $mapped = $assets->map(function($item, $key) {
+        //     return $item['asset_name'];
+        // });
+
+        return response([
+            'data' => $assets
+        ]);
     }
 }

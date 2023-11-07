@@ -14,6 +14,7 @@ class ResponsivasController extends Controller
 {
     public function index() {
         $responsivas = Responsivas::select(
+            'id',
             'usuario',
             'area',
             'asset_name',
@@ -21,26 +22,60 @@ class ResponsivasController extends Controller
         )
         ->get();
 
-        $areas = Areas::select(
-            'area'
-        )
-        ->get();
+        return response([
+            'data' => $responsivas,
+        ]);
+    }
 
-        $tipos = Tipos::select(
-            'tipo'
+    public function edit($id) {
+        $responsiva = Responsivas::select(
+            'id',
+            'usuario',
+            'supervisor',
+            'area',
+            'asset_name',
+            'quien_entrega',
+            'comentarios',
+            'firma',
+            'fecha_entrega',
+            'fecha_retiro',
+            'motivo_retiro',
+            'status',
+            'created_at',
+            'updated_at',
         )
-        ->get();
-
-        $procesos = Procesos::select(
-            'proceso'
-        )
+        ->where('id', $id)
         ->get();
 
         return response([
-            'data' => $responsivas,
-            'areas' => $areas,
-            'tipos' => $tipos,
-            'procesos' => $procesos,
+            'data' => $responsiva
+        ]);
+    }
+
+    public function store(Request $request) {
+        $responsiva = Responsiva::create([
+            'usuario',
+            'supervisor',
+            'area',
+            'asset_name',
+            'quien_entrega',
+            'comentarios',
+            'firma',
+            'fecha_entrega',
+            'fecha_retiro',
+            'motivo_retiro',
+            'status',
+        ]);
+
+        if( !$responsiva ) {
+            return response([
+                'msg' => 'No se pudo crear la responsiva, por favor valida los datos'
+            ]);
+        }
+
+        return response([
+            'msg' => 'Responsiva creada exitosamente!',
+            'data' => $responsiva
         ]);
     }
 }

@@ -23,6 +23,7 @@ class Dispositivos extends Model
         'fecha_compra',
         'garantia_inicio',
         'garantia_fin',
+        'ultimo_check',
         'active',
     ];
 }

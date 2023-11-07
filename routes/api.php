@@ -9,6 +9,7 @@ use App\Http\Controllers\Catalogos\AreasController;
 use App\Http\Controllers\Catalogos\TiposController;
 use App\Http\Controllers\Catalogos\ProcesosController;
 use App\Http\Controllers\Catalogos\ModelosController;
+use App\Http\Controllers\Checklist\ChecklistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // ===============================================================================
 // Dispositivos
 Route::get('catalogos/dispositivos', [DispositivosController::class, 'index'])->name('catalogos.areas');
+Route::get('catalogos/dispositivos/assetnames', [DispositivosController::class, 'getAssetNames'])->name('catalogos.areas.assetnames');
 Route::post('catalogos/dispositivos/store', [DispositivosController::class, 'store'])->name('catalogos.areas.store');
 
 // Áreas
@@ -52,3 +54,10 @@ Route::post('catalogos/modelos/store', [ModelosController::class, 'store'])->nam
 // ===============================================================================
 Route::get('responsivas', [ResponsivasController::class, 'index'])->name('responsivas');
 
+
+// ===============================================================================
+// Checklist
+// ===============================================================================
+// Registrar
+Route::get('checklist', [ChecklistController::class, 'index'])->name('checklist');
+Route::post('checklist/store', [ChecklistController::class, 'store'])->name('checklist/store');
