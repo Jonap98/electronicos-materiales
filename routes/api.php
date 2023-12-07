@@ -10,6 +10,7 @@ use App\Http\Controllers\Catalogos\TiposController;
 use App\Http\Controllers\Catalogos\ProcesosController;
 use App\Http\Controllers\Catalogos\ModelosController;
 use App\Http\Controllers\Checklist\ChecklistController;
+use App\Http\Controllers\auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+
+// =====================================================================
+// Auth
+// =====================================================================
+Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('register', [AuthController::class, 'register'])->name('register');
+Route::get('usuarios', [AuthController::class, 'getUsers'])->name('usuarios');
+Route::post('usuarios/update', [AuthController::class, 'update'])->name('usuarios.update');
 
 // ===============================================================================
 // Catálogos
